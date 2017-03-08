@@ -19,10 +19,78 @@
   <body>
 
     <div class="container">
-      <h1>Here will be score</h1>
+        <hr>
+      <div class="panel panel-default">
+                        <div class="panel-heading ">
+                            <h4 class="text-center">Время ожидания обработки заявки</h4></div>
+                        <div class="panel-body">
+
+
+                                <div id="score" class="alert alert-success text-center" role="alert"></div>
+                        </div>
+      </div>
+
+        <div class="panel panel-default">
+                        <div class="panel-heading ">
+                            <h5 class="text-center">Необработанных заказов</h5></div>
+                        <div class="panel-body">
+
+
+                                <div id="allNotConfirmed" class="text-center"></div>
+                                </div>
+      </div>
+        <div class="panel panel-default">
+                        <div class="panel-heading ">
+                            <h5 class="text-center">Заказов за день</h5></div>
+                        <div class="panel-body">
+
+
+                                <div id="countToday" class="text-center"></div>
+                        </div>
+      </div>
+        <div class="panel panel-default">
+                        <div class="panel-heading ">
+                            <h5 class="text-center">Необработанных за день</h5></div>
+                        <div class="panel-body">
+
+
+                                <div id="notConfirmedDay" class="text-center"></div>
+                        </div>
+      </div>
     </div><!-- /.container -->
+
+
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+  <script>
+        function getScores () {
+         $.ajax({
+            url: '/get_score',
+            type: 'POST',
+            dataType: 'json',
+            success: function(response) {
+                updateScores(response);
+            },
+            error: function(error) {
+                console.log(error);
+            }
+         })
+        }
+
+        let updateScores = (dataScores) => {
+           $("#score").text(dataScores['score'] + ' минут')
+            $("#allNotConfirmed").text(dataScores['count_not_confirmed'])
+            $("#countToday").text(dataScores['count_today'])
+        };
+
+        $(document).ready(
+            getScores(),
+            setInterval(getScores, 10000)
+        );
+
+    </script>
+
   </body>
 </html>
