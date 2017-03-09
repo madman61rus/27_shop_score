@@ -1,7 +1,22 @@
 # Shop Score Page
 
-{TODO. There will be project description}
+Проект сайта - дашборда для определения KPI по заявкам интернет магазина
 
-# Project Goals
 
-The code is written for educational purposes. Training course for web-developers - [DEVMAN.org](https://devman.org)
+## Инсталляция необходимых пакетов
+
+Для работы сайта необходимы специальные дополнения Flask. Чтобы их установить,
+из директории сайта выполните следующую команду :
+
+    $ pip install -r requirements.txt
+
+## Запуск сайта
+
+Чтобы запустить работу сайта, необходимо из каталога с сайтом выполнить
+следующую команду :
+
+    python server.py
+
+# Цели проекта
+
+Этот код написан в образовательных целях. Курс для веб-девелоперов - [DEVMAN.org](https://devman.org)

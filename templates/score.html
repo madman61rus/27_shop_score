@@ -80,9 +80,19 @@
         }
 
         let updateScores = (dataScores) => {
+
+            if (dataScores['score'] <= 7 ) {
+                $("#score").addClass('alert-success');
+            }else if (dataScores['score'] >= 7 && dataScores['score'] <= 30 ) {
+                $("#score").addClass('alert-warning');
+            }else {
+                $("#score").addClass('alert-danger');
+            }
+
            $("#score").text(dataScores['score'] + ' минут')
             $("#allNotConfirmed").text(dataScores['count_not_confirmed'])
             $("#countToday").text(dataScores['count_today'])
+            $("#notConfirmedDay").text(dataScores['count_not_confirmed_today'])
         };
 
         $(document).ready(

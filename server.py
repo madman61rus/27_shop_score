@@ -20,17 +20,18 @@ def score():
 @app.route('/get_score',methods=['POST'])
 def get_score():
     now = datetime.datetime.now()
-    tomorow = now - datetime.timedelta(days=1)
+    tomorow = now.utcnow().date()
     orders_not_confirmed = session.query(Order).filter(Order.confirmed.is_(None)).order_by(Order.created.asc()).first()
     timedelta = round((now - orders_not_confirmed.created).total_seconds()/60)
-    #TODO Переделать рассчет на сегодня ( не за сутки )
-    count_today = session.query(Order).filter( Order.created >= tomorow).count()
+    count_today = session.query(Order).filter( Order.created >= now.utcnow().date()).count()
     count_not_confirmed = session.query(Order).filter(Order.confirmed.is_(None)).count()
-    #TODO Дописать запрос на необработанных за день
+    count_not_confirmed_today = session.query(Order).filter( Order.created >= now.utcnow().date(),
+                                                             Order.confirmed.is_(None)).count()
 
     return jsonify(score = timedelta ,
                    count_today = count_today,
-                   count_not_confirmed = count_not_confirmed)
+                   count_not_confirmed = count_not_confirmed,
+                   count_not_confirmed_today=count_not_confirmed_today)
 
 
 
