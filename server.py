@@ -9,24 +9,24 @@ engine = create_engine('postgresql://score:Rysherat2@shopscore.devman.org/shop')
 session = Session(engine)
 automap = automap_base()
 automap.prepare(engine,reflect=True)
-Order = automap.classes.orders
+order = automap.classes.orders
 
 @app.route('/')
 def score():
-    print (session.query(Order).filter(Order.confirmed.is_(None)) \
-        .order_by(Order.created.asc()).first())
+    print (session.query(order).filter(order.confirmed.is_(None)) \
+           .order_by(order.created.asc()).first())
     return render_template('score.html')
 
 @app.route('/get_score',methods=['POST'])
 def get_score():
     now = datetime.datetime.now()
     tomorow = now.utcnow().date()
-    orders_not_confirmed = session.query(Order).filter(Order.confirmed.is_(None)).order_by(Order.created.asc()).first()
+    orders_not_confirmed = session.query(order).filter(order.confirmed.is_(None)).order_by(order.created.asc()).first()
     timedelta = round((now - orders_not_confirmed.created).total_seconds()/60)
-    count_today = session.query(Order).filter( Order.created >= now.utcnow().date()).count()
-    count_not_confirmed = session.query(Order).filter(Order.confirmed.is_(None)).count()
-    count_not_confirmed_today = session.query(Order).filter( Order.created >= now.utcnow().date(),
-                                                             Order.confirmed.is_(None)).count()
+    count_today = session.query(order).filter(order.created >= now.utcnow().date()).count()
+    count_not_confirmed = session.query(order).filter(order.confirmed.is_(None)).count()
+    count_not_confirmed_today = session.query(order).filter(order.created >= now.utcnow().date(),
+                                                            order.confirmed.is_(None)).count()
 
     return jsonify(score = timedelta ,
                    count_today = count_today,
