@@ -18,17 +18,14 @@ def score():
 @app.route('/get_score')
 def get_score():
     now = datetime.datetime.now()
-    orders_not_confirmed = session.query(order).filter(order.confirmed.is_(None)).order_by(order.created.asc()).first()
-    timedelta = round((now - orders_not_confirmed.created).total_seconds()/60)
+    last_not_confirmed = session.query(order).filter(order.confirmed.is_(None)).order_by(order.created.asc()).first()
+    timedelta = round((now - last_not_confirmed.created).total_seconds()/60)
     count_today = session.query(order).filter(order.created >= now.utcnow().date()).count()
     count_not_confirmed = session.query(order).filter(order.confirmed.is_(None)).count()
-    count_not_confirmed_today = session.query(order).filter(order.created >= now.utcnow().date(),
-                                                            order.confirmed.is_(None)).count()
 
     return jsonify(score = timedelta ,
                    count_today = count_today,
-                   count_not_confirmed = count_not_confirmed,
-                   count_not_confirmed_today=count_not_confirmed_today)
+                   count_not_confirmed = count_not_confirmed)
 
 
 
