@@ -13,14 +13,11 @@ order = automap.classes.orders
 
 @app.route('/')
 def score():
-    print (session.query(order).filter(order.confirmed.is_(None)) \
-           .order_by(order.created.asc()).first())
     return render_template('score.html')
 
 @app.route('/get_score',methods=['POST'])
 def get_score():
     now = datetime.datetime.now()
-    tomorow = now.utcnow().date()
     orders_not_confirmed = session.query(order).filter(order.confirmed.is_(None)).order_by(order.created.asc()).first()
     timedelta = round((now - orders_not_confirmed.created).total_seconds()/60)
     count_today = session.query(order).filter(order.created >= now.utcnow().date()).count()
