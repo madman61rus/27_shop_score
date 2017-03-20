@@ -13,41 +13,20 @@
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-
+    <link rel="stylesheet" href="../static/score.css">
   </head>
 
   <body>
 
     <div class="container">
-        <hr>
-      <div class="panel panel-default">
-                        <div class="panel-heading ">
-                            <h4 class="text-center">Время ожидания обработки заявки</h4></div>
-                        <div class="panel-body">
 
+                                <div class=" text-center description"><h3>Время обработки заказа :</h3></div>
+                                    <div class="text-center counters" ><h1 id="score" ></h1></div>
+                                <div class=" text-center description"><h3>Не обработанных заказов :</h3></div>
+                                    <div  class="text-center counters"><h2 id="allNotConfirmed"></h2></div>
+                                <div class="text-center description"><h3> Количество обработанных заявок за день :</h3></div>
+                                    <div  class="text-center counters"><h2 id="countToday"></h2></div>
 
-                                <div id="score" class="alert alert-success text-center" role="alert"></div>
-                        </div>
-      </div>
-
-        <div class="panel panel-default">
-                        <div class="panel-heading ">
-                            <h5 class="text-center">Необработанных заказов</h5></div>
-                        <div class="panel-body">
-
-
-                                <div id="allNotConfirmed" class="text-center"></div>
-                                </div>
-      </div>
-        <div class="panel panel-default">
-                        <div class="panel-heading ">
-                            <h5 class="text-center">Заказов за день</h5></div>
-                        <div class="panel-body">
-
-
-                                <div id="countToday" class="text-center"></div>
-                        </div>
-      </div>
 
     </div><!-- /.container -->
 
@@ -74,11 +53,11 @@
         let updateScores = (dataScores) => {
 
             if (dataScores['score'] <= 7 ) {
-                $("#score").addClass('alert-success');
+                $("#score").addClass('text-success');
             }else if (dataScores['score'] >= 7 && dataScores['score'] <= 30 ) {
-                $("#score").addClass('alert-warning');
+                $("#score").addClass('text-warning');
             }else {
-                $("#score").addClass('alert-danger');
+                $("#score").addClass('text-danger');
             }
 
            $("#score").text(dataScores['score'] + ' минут')
