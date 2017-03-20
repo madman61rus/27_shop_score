@@ -15,7 +15,7 @@ order = automap.classes.orders
 def score():
     return render_template('score.html')
 
-@app.route('/get_score',methods=['POST'])
+@app.route('/get_score')
 def get_score():
     now = datetime.datetime.now()
     orders_not_confirmed = session.query(order).filter(order.confirmed.is_(None)).order_by(order.created.asc()).first()
