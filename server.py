@@ -1,10 +1,10 @@
-from flask import Flask, render_template, jsonify
+from flask import Flask, render_template, jsonify, send_from_directory , request
 from sqlalchemy import create_engine
 from sqlalchemy.orm import Session
 from sqlalchemy.ext.automap import automap_base
 import datetime
 
-app = Flask(__name__ , static_folder='static', static_url_path='')
+app = Flask(__name__)
 engine = create_engine('postgresql://score:Rysherat2@shopscore.devman.org/shop')
 session = Session(engine)
 automap = automap_base()
@@ -27,6 +27,10 @@ def get_score():
                    count_today = count_today,
                    count_not_confirmed = count_not_confirmed)
 
+
+@app.route('/robots.txt')
+def static_from_root():
+    return send_from_directory('', request.path[1:])
 
 
 if __name__ == "__main__":
