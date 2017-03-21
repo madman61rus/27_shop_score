@@ -4,7 +4,7 @@ from sqlalchemy.orm import Session
 from sqlalchemy.ext.automap import automap_base
 import datetime
 
-app = Flask(__name__)
+app = Flask(__name__ , static_folder='static', static_url_path='')
 engine = create_engine('postgresql://score:Rysherat2@shopscore.devman.org/shop')
 session = Session(engine)
 automap = automap_base()
