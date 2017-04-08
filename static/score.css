@@ -35,7 +35,7 @@
         font-size: 11em;
     }
     h2{
-        font-size: 9em;
+        font-size: 10em;
     }
     h3 {
         font-size: 4em;
@@ -48,7 +48,7 @@
         font-size: 13em;
     }
     h2{
-        font-size: 11em;
+        font-size: 12em;
     }
     h3 {
         font-size: 5em;
@@ -56,12 +56,12 @@
 
 }
 
-@media (min-width: 2000px) {
+@media (min-width: 1900px) {
     h1 {
         font-size: 15em;
     }
     h2{
-        font-size: 13em;
+        font-size: 14em;
     }
     h3 {
         font-size: 5em;
