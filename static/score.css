@@ -6,39 +6,51 @@
 
 @media (min-width: 320px) {
     h1 {
-        font-size: 2em;
+        font-size: 6em;
     }
-    h2,h3 {
-        font-size: 1.5em;
+    h2 {
+        font-size: 5em;
+    }
+    h3 {
+        font-size: 2em;
     }
     
 }
 
 @media (min-width: 600px) {
     h1 {
-        font-size: 3.5em;
+        font-size: 9em;
     }
-    h2,h3 {
-        font-size: 2.5em;
+    h2h1 {
+        font-size: 8em;
+    }
+    h3 {
+        font-size: 4em;
     }
 
 }
 
 @media (min-width: 900px) {
     h1 {
-        font-size: 5em;
+        font-size: 11em;
     }
-    h2,h3 {
-        font-size: 3em;
+    h2{
+        font-size: 9em;
+    }
+    h3 {
+        font-size: 4em;
     }
 
 }
 
 @media (min-width: 1500px) {
     h1 {
-        font-size: 7em;
+        font-size: 13em;
     }
-    h2,h3 {
+    h2{
+        font-size: 11em;
+    }
+    h3 {
         font-size: 5em;
     }
 
@@ -46,10 +58,13 @@
 
 @media (min-width: 2000px) {
     h1 {
-        font-size: 9em;
+        font-size: 15em;
     }
-    h2,h3 {
-        font-size: 7em;
+    h2{
+        font-size: 13em;
+    }
+    h3 {
+        font-size: 5em;
     }
 
 }
