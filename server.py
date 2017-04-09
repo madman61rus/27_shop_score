@@ -4,6 +4,7 @@ from sqlalchemy.orm import Session
 from sqlalchemy.ext.automap import automap_base
 import datetime
 
+
 app = Flask(__name__)
 engine = create_engine('postgresql://score:Rysherat2@shopscore.devman.org/shop')
 session = Session(engine)
@@ -17,11 +18,12 @@ def score():
 
 @app.route('/get_score')
 def get_score():
+    time_offset = 180
     timedelta = 0
     now = datetime.datetime.utcnow()
     last_not_confirmed = session.query(order).filter_by(status = 'DRAFT').order_by(order.created.asc()).first()
     if last_not_confirmed:
-        timedelta = round((now - last_not_confirmed.created).total_seconds()/60)
+        timedelta = round((now - last_not_confirmed.created).total_seconds()/60) + time_offset
     count_today = session.query(order).filter(order.created >= now.utcnow().date()).count()
     count_not_confirmed = session.query(order).filter_by(status='DRAFT').count()
 
