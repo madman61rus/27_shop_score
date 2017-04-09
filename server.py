@@ -18,10 +18,10 @@ def score():
 @app.route('/get_score')
 def get_score():
     timedelta = 0
-    now = datetime.datetime.now()
+    now = datetime.datetime.utcnow()
     last_not_confirmed = session.query(order).filter_by(status = 'DRAFT').order_by(order.created.asc()).first()
     if last_not_confirmed:
-        timedelta = round((now.utcnow() - last_not_confirmed.created.utcnow()).total_seconds()/60)
+        timedelta = round((now - last_not_confirmed.created).total_seconds()/60)
     count_today = session.query(order).filter(order.created >= now.utcnow().date()).count()
     count_not_confirmed = session.query(order).filter_by(status='DRAFT').count()
 
